@@ -15,23 +15,23 @@ const path = require("path");
 
 module.exports.ipn  = async (req, res) =>{
 
-    console.log(req.body);
+    // console.log(req.body);
     
 
-    // const payment = new Payment(req.body);
-    // const tran_id = payment['tran_id'];
-    // if(payment['status'] === 'VALID')
-    // {
-    //     const order = await Order.updateOne({
-    //         transaction_id:tran_id
-    //     }, {status: 'Complete'});
-    //     await CartItem.deleteMany(order.cartItems); 
-    // }
-    // else{
-    //     await Order.deleteOne({ transaction_id: tran_id});
-    // }
-    // await payment.save();
-    // return res.status(200).send("IPN")
+    const payment = new Payment(req.body);
+    const tran_id = payment['tran_id'];
+    if(payment['status'] === 'VALID')
+    {
+        const order = await Order.updateOne({
+            transaction_id:tran_id
+        }, {status: 'Complete'});
+        await CartItem.deleteMany(order.cartItems); 
+    }
+    else{
+        await Order.deleteOne({ transaction_id: tran_id});
+    }
+    await payment.save();
+    return res.status(200).send("IPN")
 }
 
 module.exports.initPayment = async (req, res) => {
@@ -50,7 +50,7 @@ module.exports.initPayment = async (req, res) => {
     const total_item = cartItems.map(item => item.count)
         .reduce((a, b) => a + b, 0);
 
-        const tran_id = '_' + Math.random().toString(36) + (new Date()).getTime();
+        const tran_id = '_' + Math.random().toString(36) + (new Date()).getTime(); 
 
     const payment = new PaymentSession(true, process.env.STORE_ID, process.env.STORE_PASSWORD);
 
@@ -100,7 +100,7 @@ module.exports.initPayment = async (req, res) => {
 
     // Set Product Profile
     payment.setProductInfo({
-        product_name: 'Bohubrihi E-com Products',
+        product_name: 'Stylesense',
         product_category: 'General',
         product_profile: 'general'
     });
