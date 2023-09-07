@@ -57,8 +57,8 @@ module.exports.initPayment = async (req, res) => {
     // Set the urls
     payment.setUrls({
         success: 'https://stylesense242631.onrender.com/api/payment/success', // If payment Succeed
-        fail: 'yoursite.com/fail', // If payment failed
-        cancel: 'yoursite.com/cancel', // If user cancel payment
+        fail: 'https://stylesense242631.onrender.com/api/payment/fail', // If payment failed
+        cancel: 'https://stylesense242631.onrender.com/api/payment/cancel', // If user cancel payment
         ipn: 'https://stylesense242631.onrender.com/api/payment/ipn' 
         // SSLCommerz will send http post request in this link
     });
@@ -119,4 +119,13 @@ module.exports.initPayment = async (req, res) => {
 
 module.exports.paymentSuccess = async (req, res) => {
     res.sendFile(path.join(__basedir + "/public/success.html"))
+}
+
+
+module.exports.paymentCancel = async (req, res) => {
+    res.sendFile(path.join(__basedir + "/public/failedPayment.html"))
+}
+
+module.exports.paymentfail = async (req, res) => {
+    res.sendFile(path.join(__basedir + "/public/failedPayment.html"))
 }
