@@ -56,7 +56,7 @@ module.exports.initPayment = async (req, res) => {
 
     // Set the urls
     payment.setUrls({
-        success: 'yoursite.com/success', // If payment Succeed
+        success: 'https://stylesense242631.onrender.com/api/payment/success', // If payment Succeed
         fail: 'yoursite.com/fail', // If payment failed
         cancel: 'yoursite.com/cancel', // If user cancel payment
         ipn: 'https://stylesense242631.onrender.com/api/payment/ipn' 
