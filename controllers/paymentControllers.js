@@ -15,7 +15,6 @@ const path = require("path");
 
 module.exports.ipn  = async (req, res) =>{
 
-    // console.log(req.body);
     
 
     const payment = new Payment(req.body);
