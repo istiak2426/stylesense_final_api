@@ -1,11 +1,10 @@
-require('express-async-errors');
-const express = require('express');
+require("express-async-errors");
+const express = require("express");
 
 const app = express();
 
-
-require("./middlewares/index")(app)
-require("./middlewares/routes")(app)
+require("./middlewares/index")(app);
+require("./middlewares/routes")(app);
 
 
 
