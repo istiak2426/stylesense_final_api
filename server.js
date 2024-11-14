@@ -17,7 +17,7 @@ try {
 }
 
 app.get("/", (req, res) => {
-  return res.send("shanto");
+  return res.send("shanto updated");
 });
 
 const port = process.env.PORT || 3001;
