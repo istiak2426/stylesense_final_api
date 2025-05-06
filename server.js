@@ -9,7 +9,11 @@ try {
   // Connect to the MongoDB cluster
   mongoose.connect(
     mongoAtlasUri,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+      {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          tlsAllowInvalidCertificates: true 
+      },
     () => console.log(" Mongoose is connected")
   );
 } catch (e) {
