@@ -42,17 +42,7 @@ module.exports.getProductsAll = async(req, res) =>{
     return res.status(200).send(products);
 }
 
-// module.exports.getProducts = async (req, res) => {
-//     let order = req.query.order === 'desc' ? -1 : 1;
-//     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
-//     let limit = req.query.limit ? parseInt(req.query.limit) : 50;
-//     const products = await Product.find()
-//         .select({ photo: 0 })
-//         .sort({ [sortBy]: order })
-//         .limit(limit)
-//         .populate('category', 'name');
-//     return res.status(200).send(products);
-// }
+
 
 module.exports.getProductById = async (req, res) => {
     const productId = req.params.id;
@@ -151,6 +141,19 @@ module.exports.filterProducts = async (req, res) => {
         .limit(limit)
     return res.status(200).send(products);
 }
+
+module.exports.deleteProductById = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const product = await Product.findByIdAndDelete(productId);
+        if (!product) {
+            return res.status(404).send("Product not found!");
+        }
+        return res.status(200).send({ message: "Product deleted successfully!" });
+    } catch (error) {
+        return res.status(500).send("Internal server error!");
+    }
+};
 
 
 
